@@ -4,6 +4,7 @@ const propertySchema = new mongoose.Schema({
   title: { type: String, required: true },          // ex: Appartement T2 centre ville
   address: { type: String, required: true },
   rent: { type: Number, required: true },           // montant du loyer
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // propriétaire
   tenant: { type: mongoose.Schema.Types.ObjectId, ref: 'Tenant' }, // référence vers le locataire, optionnel
   createdAt: { type: Date, default: Date.now }
 });

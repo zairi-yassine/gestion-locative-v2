@@ -27,3 +27,23 @@ exports.create = async (req, res) => {
     res.status(500).json({ message: 'Erreur serveur' });
   }
 };
+
+exports.update = async (req, res) => {
+  try {
+    const payment = await Payment.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!payment) return res.status(404).json({ message: 'Paiement non trouvé' });
+    res.json(payment);
+  } catch (err) {
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+};
+
+exports.remove = async (req, res) => {
+  try {
+    const payment = await Payment.findByIdAndDelete(req.params.id);
+    if (!payment) return res.status(404).json({ message: 'Paiement non trouvé' });
+    res.json({ message: 'Paiement supprimé' });
+  } catch (err) {
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+};
